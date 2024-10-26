@@ -1,0 +1,29 @@
+body {
+  background-color: grey;
+}
+
+.artifact-container{
+  margin: auto;
+  border-radius: 25px;
+  width: 50%;
+  background-color:white;
+  padding: 15px;
+  box-shadow: 5px 8px;
+}
+.art1images{
+  margin: auto;
+  width: 60%;
+  
+}
+.maze{
+  
+  width: 50%;
+  top: 50%;
+  left: 50%;
+}
+
+.art1Final{
+  width: 70%;
+  top: 50%;
+  left: 50%;
+}
