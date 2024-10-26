@@ -1,0 +1,103 @@
+
+
+<style>
+  .button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  h1 {
+    color : green
+  }
+  .addNewButton {
+    border-radius: 0%;
+    float: right;
+  }
+  .deleteButton{
+    border-radius: 50%;
+    
+    background-color: red
+    
+  }
+
+ 
+  .mat-column-itemName {
+  width: 3px;
+  border-right: 1px solid currentColor;
+  padding-right: 12px;
+  text-align: center;
+}
+.mat-column-quantity {
+  width: 3px;
+  padding-right: 1px;
+  text-align: center;
+}
+.radioButton{
+  display:flex ;
+  width:100%;
+  font-size:0.5em;
+  justify-content: space-between;
+}
+
+</style>
+
+ 
+  <h1 style="text-align: center;" >{{ title }}</h1>
+  
+  <button class="button deleteButton" (click)="delete()" >X</button>
+  <!-- This button triggers the AddNewItem overlay and is it's origin -->
+  <button class="button addNewButton" (click)="addNew()" type="button">
+    +
+  </button>
+  
+  
+  
+
+<!-- This template displays the overlay content and is connected to the button -->
+  
+  <ng-template
+    class="overlay"
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOpen]="showAddNew"
+  >
+      <!--- Add new item -->
+    <div *ngIf="showAddNew" class="card">
+      <app-add-new-item class="addCard">
+        Card content
+      </app-add-new-item>
+    </div>
+  </ng-template>
+
+  <table mat-table="inventory" [dataSource]="message" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="itemName">
+      <th mat-header-cell *matHeaderCellDef> Item Name </th>
+      <mat-radio-group [(ngModel)]="selectedRadio">
+        <td mat-cell *matCellDef="let message"> <mat-radio-button class="radioButton" value={{message.itemName}}></mat-radio-button>{{message.itemName}} </td>
+      </mat-radio-group>
+      
+    </ng-container>
+  
+    <!-- quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let message"> <button id="dec" name={{message.itemName}} (click)="decrease($event)" value={{message.quantity}}>-</button>&nbsp;&nbsp;{{message.quantity}}&nbsp;&nbsp;<button id="inc" name={{message.itemName}} (click)="increase($event)">+</button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+  </table>
+      
+
+
